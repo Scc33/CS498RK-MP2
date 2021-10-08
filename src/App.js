@@ -15,7 +15,7 @@ import Home from './components/Home';
 function App() {
   return (
     <Router>
-      <Container maxWidth="xs">
+      <Container>
         <div className="App">
           <header className="App-header">
             <h1>Movies</h1>
@@ -43,9 +43,3 @@ function App() {
 }
 
 export default App;
-
-//https://codepen.io/gaearon/pen/LzWZvb?editors=0010
-//https://gitlab.com/uiuc-web-programming/react-demo
-//https://uiuc-web-programming.gitlab.io/fa21/slides/routing_and_state_11.pdf (routing/state)
-//https://gitlab.com/uiuc-web-programming/mp2
-//https://developer.marvel.com/account

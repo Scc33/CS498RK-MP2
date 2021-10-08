@@ -10,6 +10,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Select from '@mui/material/Select';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
 import axios from 'axios';
 
 class Search extends Component {
@@ -45,12 +48,18 @@ class Search extends Component {
     render() {
         var namesList = this.state.popularMovies.map(function (movie) {
             return (
-                <li>{movie.original_title} 
-                {movie.overview} 
-                {movie.vote_average} 
-                {movie.vote_count} 
-                {movie.release_date} 
-                <img src={"https://image.tmdb.org/t/p/w500" + movie.poster_path} alt={movie.original_title}/></li>
+                <Card sx={{ minWidth: 275, maxWidth: 500 }}>
+                    <CardContent>
+                        {movie.original_title}
+                        {movie.overview}
+                        {movie.vote_average}
+                        {movie.vote_count}
+                        {movie.release_date}
+                        <img src={"https://image.tmdb.org/t/p/w500" + movie.poster_path} alt={movie.original_title} />
+                    </CardContent>
+                    <CardActions>
+                    </CardActions>
+                </Card>
             );
         });
         return (
@@ -80,7 +89,9 @@ class Search extends Component {
                         <FormControlLabel value="other" control={<Radio />} label="Other" />
                     </RadioGroup>
                 </FormControl>
-                <ul>{namesList}</ul>
+                <Grid item>
+                {namesList}
+                </Grid>
             </Container>
         );
     }

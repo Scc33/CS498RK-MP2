@@ -30,8 +30,6 @@ class Gallery extends Component {
     this.setState({ filtered });
   }
 
-
-
   componentDidMount() {
     //API: f052c50e624989f8ef4a5acc45dfc7f2
     axios.get('https://api.themoviedb.org/3/genre/movie/list?api_key=f052c50e624989f8ef4a5acc45dfc7f2&language=en-US')
