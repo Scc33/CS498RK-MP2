@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
 } from "react-router-dom";
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
@@ -21,9 +20,9 @@ function App() {
           <header className="App-header">
             <h1>Movies</h1>
             <Grid item>
-              <Link to="/"><Button variant="contained" onclick="/">Home</Button></Link>
-              <Link to="/Search"><Button variant="contained">Search</Button></Link>
-              <Link to="/Gallery"><Button variant="contained">Gallery</Button></Link>
+              <Button variant="contained" href="/">Home</Button>
+              <Button variant="contained" href="/Search">Search</Button>
+              <Button variant="contained" href="/Gallery">Gallery</Button>
             </Grid>
             <Switch>
               <Route path="/Search">

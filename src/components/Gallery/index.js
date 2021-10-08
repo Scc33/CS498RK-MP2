@@ -9,7 +9,12 @@ class Gallery extends Component {
   state = {
     filtered: [],
     popularMovies: [],
-    genres: []
+    genres: [],
+    genreButtons: '',
+    handleGenreChange(event) {
+      console.log(this.state);
+      console.log(event)
+    }
   }
 
   constructor(props) {
@@ -17,13 +22,30 @@ class Gallery extends Component {
     this.handleSearchChange = this.handleSearchChange.bind(this);
   }
 
+  handleSearchChange(event) {
+    const { value } = event.target;
+    const filtered = this.state.popularMovies.filter(movie => (
+      movie.original_title.toLowerCase().includes(value.toLowerCase())
+    ));
+    this.setState({ filtered });
+  }
+
+
+
   componentDidMount() {
     //API: f052c50e624989f8ef4a5acc45dfc7f2
     axios.get('https://api.themoviedb.org/3/genre/movie/list?api_key=f052c50e624989f8ef4a5acc45dfc7f2&language=en-US')
       .then(res => {
         console.log(res.data.genres);
         const genres = res.data.genres;
-        this.setState({ genres });
+        this.setState({ genres: genres })
+        /*var genres = res.data.genres;
+        var i;
+        var loopData = ''
+        for (i = 0; i < genres.length; i++) {
+          loopData += `<Button variant="constrained" id=${genres[i].id} onClick=this.handleGenreChange>${genres[i].name}</Button>`
+        }
+        this.setState({ genreButtons: loopData })*/
       })
 
     return axios.get('https://api.themoviedb.org/3/movie/popular?api_key=f052c50e624989f8ef4a5acc45dfc7f2&language=en-US&page=1')
@@ -35,38 +57,13 @@ class Gallery extends Component {
       })
   }
 
-  handleSearchChange(event) {
-    const { value } = event.target;
-    console.log(this.state);
-    const filtered = this.state.popularMovies.filter(movie => (
-      movie.original_title.toLowerCase().includes(value.toLowerCase())
-    ));
-
-    this.setState({ filtered });
-  }
-
-  handleGenreChange(event) {
-    const { value } = event.target;
-    console.log(this.state);
-    const filtered = this.state.popularMovies.filter(movie => (
-      movie.original_title.toLowerCase().includes(value.toLowerCase())
-    ));
-
-    this.setState({ filtered });
-  }
-
   render() {
-    console.log(this.state.genres)
-    var genreList = this.state.genres.map(function (genre) {
-      return (
-        <Button variant="contained" id={genre.id}>{genre.name}</Button>
-      );
-    });
     return (
       <div className="App">
         <Header />
         <GallerySearch onChange={this.handleSearchChange} />
-        { genreList }
+        <Button variant="constrained" id="2" onClick={this.handleGenreChange}>asdf</Button>
+        <div dangerouslySetInnerHTML={{__html: this.state.genreButtons}} />
         <Results movies={this.state.filtered} />
       </div>
     );
