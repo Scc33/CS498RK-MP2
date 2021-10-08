@@ -6,13 +6,10 @@ class Results extends Component {
   render() {
     return (
       <div className="Results">
-        {this.props.emojis.map((emoji) => (
-          <div className="Results-item" key={emoji.title}>
-            <div className="Results-symbol">
-              {emoji.symbol}
-            </div>
-            <div className="Results-title">
-              {emoji.title}
+        {this.props.movies.map((movie) => (
+          <div className="Results-item" key={movie.original_title}>
+            <div >
+              {movie.original_title}
             </div>
 
           </div>

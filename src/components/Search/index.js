@@ -12,12 +12,6 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import axios from 'axios';
 
-/*const [age, setAge] = React.useState(''); //hook
-
-        const handleChange = (event) => {
-            setAge(event.target.value);
-        };*/
-
 class Search extends Component {
     state = { popularMovies: [] }
 
@@ -57,7 +51,7 @@ class Search extends Component {
                 {movie.vote_average} 
                 {movie.vote_count} 
                 {movie.release_date} 
-                <img src={"https://image.tmdb.org/t/p/w500" + movie.poster_path}></img></li>
+                <img src={"https://image.tmdb.org/t/p/w500" + movie.poster_path} /></li>
             );
         })
         return (
