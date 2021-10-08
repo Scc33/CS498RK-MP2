@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { Component } from 'react';
 import PropTypes from "prop-types";
 import Container from '@material-ui/core/Container'
@@ -20,7 +19,7 @@ import axios from 'axios';
         };*/
 
 class Search extends Component {
-    const [popMovies, setPopMovies] = useState('');
+    state = { popularMovies: [] }
 
     constructor(props) {
         super(props);
@@ -45,17 +44,22 @@ class Search extends Component {
         return axios.get('https://api.themoviedb.org/3/movie/popular?api_key=f052c50e624989f8ef4a5acc45dfc7f2&language=en-US&page=1')
             .then(res => {
                 const popularMovies = res.data.results;
-                this.setPopMovies({ popularMovies });
+                this.setState({ popularMovies });
             })
     }
 
     render() {
-        console.log(this.popMovies);
-        /*var namesList = this.state.popularMovies.map(function(movie) {
-            return <li>{movie.original_title}</li>;
-          })
-          <ul>{ namesList }</ul>
-          */
+        console.log(this.state.popularMovies);
+        var namesList = this.state.popularMovies.map(function (movie) {
+            return (
+                <li>{movie.original_title} 
+                {movie.overview} 
+                {movie.vote_average} 
+                {movie.vote_count} 
+                {movie.release_date} 
+                <img src={"https://image.tmdb.org/t/p/w500" + movie.poster_path}></img></li>
+            );
+        })
         return (
             <Container>
                 <Grid>
@@ -83,6 +87,7 @@ class Search extends Component {
                         <FormControlLabel value="other" control={<Radio />} label="Other" />
                     </RadioGroup>
                 </FormControl>
+                <ul>{namesList}</ul>
             </Container>
         );
     }
