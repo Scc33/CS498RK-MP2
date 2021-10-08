@@ -8,16 +8,9 @@ import {
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Select from '@mui/material/Select';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
 
-import Gallery from './components/Gallery';
+import Search from './components/Search';
+import GallerySearch from './components/GallerySearch';
 import Home from './components/Home';
 
 function App() {
@@ -37,7 +30,7 @@ function App() {
                 <Search />
               </Route>
               <Route path="/Gallery">
-                <Gallery />
+                <GallerySearch />
               </Route>
               <Route path="/">
                 <Home />
@@ -47,45 +40,6 @@ function App() {
         </div>
       </Container>
     </Router>
-  );
-}
-
-function Search() {
-  const [age, setAge] = React.useState(''); //hook
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
-
-  return (
-    <Container>
-      <Grid>
-        <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-      </Grid>
-      <FormControl>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Age"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-        <RadioGroup
-          aria-label="gender"
-          defaultValue="female"
-          name="radio-buttons-group"
-        >
-          <FormControlLabel value="female" control={<Radio />} label="Female" />
-          <FormControlLabel value="male" control={<Radio />} label="Male" />
-          <FormControlLabel value="other" control={<Radio />} label="Other" />
-        </RadioGroup>
-      </FormControl>
-    </Container>
   );
 }
 

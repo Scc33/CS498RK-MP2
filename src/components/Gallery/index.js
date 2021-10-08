@@ -1,7 +1,7 @@
 import { Component } from 'react';
 
 import Header from '../Header';
-import Search from '../Search';
+import Search from '../GallarySearch';
 import Results from '../Results';
 
 import emojis from "../../emojis.json";
