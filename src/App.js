@@ -1,6 +1,13 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+  useParams
+} from "react-router-dom";
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
@@ -12,6 +19,42 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 function App() {
+  return (
+    <Router>
+      <Container maxWidth="xs">
+        <div className="App">
+          <header className="App-header">
+            <h1>Movies</h1>
+            <Grid item>
+              <Button variant="contained"><Link to="/">Home</Link></Button>
+              <Button variant="contained"><Link to="/Search">Search</Link></Button>
+              <Button variant="contained"><Link to="/Gallery">Gallery</Link></Button>
+            </Grid>
+            <Switch>
+            <Route path="/Search">
+                <Search />
+              </Route>
+              <Route path="/Gallery">
+                <Gallery />
+              </Route>
+              <Route path="/">
+                <Home />
+              </Route>
+            </Switch>
+          </header>
+        </div>
+      </Container>
+    </Router>
+  );
+}
+
+function Home() {
+  return (
+    <h1>Home</h1>
+  )
+}
+
+function Search() {
   const [age, setAge] = React.useState('');
 
   const handleChange = (event) => {
@@ -19,35 +62,31 @@ function App() {
   };
 
   return (
-    <Container maxWidth="xs">
-      <div className="App">
-        <header className="App-header">
-          
-          <Grid item>
-            <Button variant="contained">Search</Button>
-            <Button variant="contained">Gallery</Button>
-          </Grid>
-          <Grid>
-          <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-          </Grid>
-          <FormControl>
-            <InputLabel id="demo-simple-select-label">Age</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={age}
-              label="Age"
-              onChange={handleChange}
-            >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-
-          </FormControl>
-        </header>
-      </div>
+    <Container>
+      <Grid>
+        <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+      </Grid>
+      <FormControl>
+        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Age"
+          onChange={handleChange}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
     </Container>
+  );
+}
+
+function Gallery() {
+  return (
+    <h1>Gallery</h1>
   )
 }
 
