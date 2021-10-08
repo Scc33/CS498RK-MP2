@@ -17,6 +17,9 @@ import Select from '@mui/material/Select';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 
+import Gallery from './components/Gallery';
+import Home from './components/Home';
+
 function App() {
   return (
     <Router>
@@ -30,7 +33,7 @@ function App() {
               <Button variant="contained"><Link to="/Gallery">Gallery</Link></Button>
             </Grid>
             <Switch>
-            <Route path="/Search">
+              <Route path="/Search">
                 <Search />
               </Route>
               <Route path="/Gallery">
@@ -47,14 +50,8 @@ function App() {
   );
 }
 
-function Home() {
-  return (
-    <h1>Home</h1>
-  )
-}
-
 function Search() {
-  const [age, setAge] = React.useState('');
+  const [age, setAge] = React.useState(''); //hook
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -79,23 +76,17 @@ function Search() {
           <MenuItem value={30}>Thirty</MenuItem>
         </Select>
         <RadioGroup
-        aria-label="gender"
-        defaultValue="female"
-        name="radio-buttons-group"
-      >
-        <FormControlLabel value="female" control={<Radio />} label="Female" />
-        <FormControlLabel value="male" control={<Radio />} label="Male" />
-        <FormControlLabel value="other" control={<Radio />} label="Other" />
-      </RadioGroup>
+          aria-label="gender"
+          defaultValue="female"
+          name="radio-buttons-group"
+        >
+          <FormControlLabel value="female" control={<Radio />} label="Female" />
+          <FormControlLabel value="male" control={<Radio />} label="Male" />
+          <FormControlLabel value="other" control={<Radio />} label="Other" />
+        </RadioGroup>
       </FormControl>
     </Container>
   );
-}
-
-function Gallery() {
-  return (
-    <h1>Gallery</h1>
-  )
 }
 
 export default App;
