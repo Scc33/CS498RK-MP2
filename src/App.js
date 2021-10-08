@@ -10,7 +10,7 @@ import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button';
 
 import Search from './components/Search';
-import GallerySearch from './components/GallerySearch';
+import Gallery from './components/Gallery';
 import Home from './components/Home';
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
                 <Search />
               </Route>
               <Route path="/Gallery">
-                <GallerySearch />
+                <Gallery />
               </Route>
               <Route path="/">
                 <Home />

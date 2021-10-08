@@ -1,7 +1,7 @@
 import { Component } from 'react';
 
 import Header from '../Header';
-import Search from '../GallarySearch';
+import GallerySearch from '../GallerySearch';
 import Results from '../Results';
 
 import emojis from "../../emojis.json";
@@ -27,7 +27,7 @@ class Gallery extends Component {
     return (
       <div className="App">
         <Header />
-        <Search onChange={this.handleSearchChange} />
+        <GallerySearch onChange={this.handleSearchChange} />
         <Results emojis={this.state.emojis} />
       </div>
     );

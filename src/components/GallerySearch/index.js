@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import PropTypes from "prop-types";
+import TextField from '@material-ui/core/TextField';
 import './styles.scss';
 
 class GallerySearch extends Component {
@@ -24,7 +25,7 @@ class GallerySearch extends Component {
   render() {
     return (
       <div className="Search">
-        <input className="Search-input" onChange={this.handleChange} />
+        <TextField id="outlined-basic" label="Outlined" variant="outlined" onChange={this.handleChange} />
       </div>
     );
   }
