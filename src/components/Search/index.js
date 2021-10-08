@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Component } from 'react';
 import PropTypes from "prop-types";
 import Container from '@material-ui/core/Container'
@@ -10,6 +11,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Select from '@mui/material/Select';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
+import axios from 'axios';
 
 /*const [age, setAge] = React.useState(''); //hook
 
@@ -18,6 +20,8 @@ import RadioGroup from '@mui/material/RadioGroup';
         };*/
 
 class Search extends Component {
+    const [popMovies, setPopMovies] = useState('');
+
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
@@ -36,7 +40,22 @@ class Search extends Component {
         onChange(event);
     }
 
+    componentDidMount() {
+        //API: f052c50e624989f8ef4a5acc45dfc7f2
+        return axios.get('https://api.themoviedb.org/3/movie/popular?api_key=f052c50e624989f8ef4a5acc45dfc7f2&language=en-US&page=1')
+            .then(res => {
+                const popularMovies = res.data.results;
+                this.setPopMovies({ popularMovies });
+            })
+    }
+
     render() {
+        console.log(this.popMovies);
+        /*var namesList = this.state.popularMovies.map(function(movie) {
+            return <li>{movie.original_title}</li>;
+          })
+          <ul>{ namesList }</ul>
+          */
         return (
             <Container>
                 <Grid>
