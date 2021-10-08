@@ -43,7 +43,6 @@ class Search extends Component {
     }
 
     render() {
-        console.log(this.state.popularMovies);
         var namesList = this.state.popularMovies.map(function (movie) {
             return (
                 <li>{movie.original_title} 
@@ -51,9 +50,9 @@ class Search extends Component {
                 {movie.vote_average} 
                 {movie.vote_count} 
                 {movie.release_date} 
-                <img src={"https://image.tmdb.org/t/p/w500" + movie.poster_path} /></li>
+                <img src={"https://image.tmdb.org/t/p/w500" + movie.poster_path} alt={movie.original_title}/></li>
             );
-        })
+        });
         return (
             <Container>
                 <Grid>

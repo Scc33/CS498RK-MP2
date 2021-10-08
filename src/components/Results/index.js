@@ -8,10 +8,12 @@ class Results extends Component {
       <div className="Results">
         {this.props.movies.map((movie) => (
           <div className="Results-item" key={movie.original_title}>
-            <div >
+            <div>
+              <img src={"https://image.tmdb.org/t/p/w500" + movie.poster_path} />
+            </div>
+            <div>
               {movie.original_title}
             </div>
-
           </div>
         ))}
       </div>
@@ -20,16 +22,16 @@ class Results extends Component {
 }
 
 Results.propTypes = {
-  emojis: PropTypes.arrayOf(
+  movies: PropTypes.arrayOf(
     PropTypes.shape({
-      symbol: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired
+      original_title: PropTypes.string.isRequired,
+      poster_path: PropTypes.string.isRequired
     })
   ).isRequired
 };
 
 Results.defaultProps = {
-  emoji: []
+  movies: []
 }
 
 export default Results;

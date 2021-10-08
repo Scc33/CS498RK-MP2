@@ -21,9 +21,9 @@ function App() {
           <header className="App-header">
             <h1>Movies</h1>
             <Grid item>
-              <Button variant="contained"><Link to="/">Home</Link></Button>
-              <Button variant="contained"><Link to="/Search">Search</Link></Button>
-              <Button variant="contained"><Link to="/Gallery">Gallery</Link></Button>
+              <Link to="/"><Button variant="contained" onclick="/">Home</Button></Link>
+              <Link to="/Search"><Button variant="contained">Search</Button></Link>
+              <Link to="/Gallery"><Button variant="contained">Gallery</Button></Link>
             </Grid>
             <Switch>
               <Route path="/Search">
