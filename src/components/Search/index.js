@@ -3,11 +3,8 @@ import PropTypes from "prop-types";
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Select from '@mui/material/Select';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import Card from '@mui/material/Card';
@@ -21,6 +18,7 @@ class Search extends Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
+        this.handleTypeChange = this.handleTypeChange.bind(this);
     }
 
     static propTypes = {
@@ -36,9 +34,36 @@ class Search extends Component {
         onChange(event);
     }
 
+    handleTypeChange = key => (event, value) => {
+        console.log(key);
+        if (value == "movie") {
+            axios.get('https://api.themoviedb.org/3/movie/popular?api_key=f052c50e624989f8ef4a5acc45dfc7f2&language=en-US&page=1')
+            .then(res => {
+                const popularMovies = res.data.results;
+                this.setState({ popularMovies });
+            })
+        } else {
+            axios.get('https://api.themoviedb.org/3/tv/popular?api_key=f052c50e624989f8ef4a5acc45dfc7f2&language=en-US&page=1')
+            .then(res => {
+                const popularMovies = res.data.results;
+                this.setState({ popularMovies });
+            })
+        }
+        this.setState({
+            [key]: value
+          });
+      };
+
     componentDidMount() {
         //API: f052c50e624989f8ef4a5acc45dfc7f2
+        //Popular movies
         return axios.get('https://api.themoviedb.org/3/movie/popular?api_key=f052c50e624989f8ef4a5acc45dfc7f2&language=en-US&page=1')
+            .then(res => {
+                const popularMovies = res.data.results;
+                this.setState({ popularMovies });
+            })
+            //Popular tv shows
+            return axios.get('https://api.themoviedb.org/3/tv/popular?api_key=f052c50e624989f8ef4a5acc45dfc7f2&language=en-US&page=1')
             .then(res => {
                 const popularMovies = res.data.results;
                 this.setState({ popularMovies });
@@ -68,25 +93,22 @@ class Search extends Component {
                     <TextField id="outlined-basic" label="Outlined" variant="outlined" />
                 </Grid>
                 <FormControl>
-                    <InputLabel id="demo-simple-select-label">Age</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        label="Age"
-                        onChange={this.handleChange}
-                    >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
                     <RadioGroup
                         aria-label="gender"
-                        defaultValue="female"
+                        defaultValue="movie"
+                        name="radio-buttons-group"
+                        onChange={this.handleTypeChange("type")}
+                    >
+                        <FormControlLabel value="movie" control={<Radio />} label="Popular Movies" />
+                        <FormControlLabel value="tv" control={<Radio />} label="Popular TV Shows" />
+                    </RadioGroup>
+                    <RadioGroup
+                        aria-label="gender"
+                        defaultValue="ascending"
                         name="radio-buttons-group"
                     >
-                        <FormControlLabel value="female" control={<Radio />} label="Female" />
-                        <FormControlLabel value="male" control={<Radio />} label="Male" />
-                        <FormControlLabel value="other" control={<Radio />} label="Other" />
+                        <FormControlLabel value="ascending" control={<Radio />} label="Ascending" />
+                        <FormControlLabel value="decending" control={<Radio />} label="Descending" />
                     </RadioGroup>
                 </FormControl>
                 <Grid item>
