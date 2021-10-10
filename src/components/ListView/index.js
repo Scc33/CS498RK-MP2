@@ -15,109 +15,93 @@ import axios from 'axios';
 class ListView extends Component {
     state = {
         filter: [],
-        popular: [],
+        popularMovies: [],
+        popularTVs: [],
         type: "movie",
         order: "ascending"
     }
 
     constructor(props) {
         super(props);
-        this.handleChange = this.handleChange.bind(this);
         this.handleTypeChange = this.handleTypeChange.bind(this);
         this.handleSearchChange = this.handleSearchChange.bind(this);
         this.handleOrderChange = this.handleOrderChange.bind(this);
     }
 
-    static propTypes = {
-        onChange: PropTypes.func
-    };
-
-    static defaultProps = {
-        onChange: () => { }
-    }
-
     handleSearchChange(event) {
         const { value } = event.target;
-        if (this.state.type == "movie") {
-            const filter = this.state.popular.filter(content => (
+        var filter;
+        if (this.state.type === "movie") {
+            filter = this.state.popularMovies.filter(content => (
                 content.title.toLowerCase().includes(value.toLowerCase())
             ));
-            this.setState({ filter });
+            if (this.state.order === "descending") {
+                filter.reverse();
+            }
         } else {
-            const filter = this.state.popular.filter(content => (
+            filter = this.state.popularTVs.filter(content => (
                 content.name.toLowerCase().includes(value.toLowerCase())
             ));
-            this.setState({ filter });
+            if (this.state.order === "descending") {
+                filter.reverse();
+            }
         }
-    }
-
-    handleChange(event) {
-        const { onChange } = this.props;
-        onChange(event);
+        this.setState({ filter });
     }
 
     handleTypeChange = key => (event, value) => {
-        if (this.state.type === "movie") {
-            this.setState({ });
-        } else {
-            axios.get('https://api.themoviedb.org/3/tv/popular?api_key=f052c50e624989f8ef4a5acc45dfc7f2&language=en-US&page=1')
-                .then(res => {
-                    const popular = res.data.results;
-                    this.setState({ popular });
-                    const filter = res.data.results;
-                    this.setState({ filter });
-                })
-        }
         this.setState({
             [key]: value
         });
-        console.log([key], value, this.state)
+        if (value === "movie") {
+            if (this.state.order === "descending") {
+                console.log("reversing");
+                const filter = this.state.popularMovies.slice().reverse();
+                this.setState({ filter });
+            } else {
+                const filter = this.state.popularMovies;
+                this.setState({ filter });
+            }
+        } else {
+            if (this.state.order === "descending") {
+                const filter = this.state.popularTVs.slice().reverse();
+                this.setState({ filter });
+            } else {
+                const filter = this.state.popularTVs;
+                this.setState({ filter });
+            }
+        }
     };
 
     handleOrderChange = key => (event, value) => {
-        const filter = this.state.filter.reverse();
+        const filter = this.state.filter.slice().reverse();
         this.setState({ filter });
         this.setState({
             [key]: value
         });
-        console.log([key], value, this.state)
     };
 
+    //API: f052c50e624989f8ef4a5acc45dfc7f2
     componentDidMount() {
-        //API: f052c50e624989f8ef4a5acc45dfc7f2
-        //Popular movies
-        return axios.get('https://api.themoviedb.org/3/movie/popular?api_key=f052c50e624989f8ef4a5acc45dfc7f2&language=en-US&page=1')
+        axios.get('https://api.themoviedb.org/3/movie/popular?api_key=f052c50e624989f8ef4a5acc45dfc7f2&language=en-US&page=1')
             .then(res => {
-                const popular = res.data.results;
-                this.setState({ popular });
+                const popularMovies = res.data.results;
+                this.setState({ popularMovies });
                 const filter = res.data.results;
                 this.setState({ filter });
+            })
+        axios.get('https://api.themoviedb.org/3/tv/popular?api_key=f052c50e624989f8ef4a5acc45dfc7f2&language=en-US&page=1')
+            .then(res => {
+                const popularTVs = res.data.results;
+                this.setState({ popularTVs });
             })
     }
 
     render() {
-        var namesList = this.state.popular.map(function (movie) {
-            return (
-                <Card sx={{ minWidth: 275, maxWidth: 500 }}>
-                    <CardContent>
-                        {movie.original_title}
-                        {movie.overview}
-                        {movie.vote_average}
-                        {movie.vote_count}
-                        {movie.release_date}
-                        <img src={"https://image.tmdb.org/t/p/w500" + movie.poster_path} alt={movie.original_title} />
-                    </CardContent>
-                    <CardActions>
-                    </CardActions>
-                </Card>
-            );
-        });
         return (
             <div className="App">
                 <Container>
-                    <Grid>
                         <Search onChange={this.handleSearchChange} />
-                    </Grid>
                     <FormControl>
                         <RadioGroup
                             aria-label="gender"
@@ -135,18 +119,23 @@ class ListView extends Component {
                             onChange={this.handleOrderChange("order")}
                         >
                             <FormControlLabel value="ascending" control={<Radio />} label="Ascending" />
-                            <FormControlLabel value="decending" control={<Radio />} label="Descending" />
+                            <FormControlLabel value="descending" control={<Radio />} label="Descending" />
                         </RadioGroup>
                     </FormControl>
                     <Grid item>
-                        {this.state.filter.map((movie) => (
-                            <div className="Results-item" key={movie.original_title}>
-                                <div>
-                                    <img src={"https://image.tmdb.org/t/p/w500" + movie.poster_path} />
-                                </div>
-                                <div>
-                                    {movie.original_title}
-                                </div>
+                        {this.state.filter.map((content) => (
+                            <div className="Results-item" key={content.id}>
+                                <Card sx={{ minWidth: 275, maxWidth: 500 }}>
+                                    <CardContent>
+                                        {content.overview}
+                                        {content.vote_average}
+                                        {content.vote_count}
+                                        {content.release_date}
+                                        <img src={"https://image.tmdb.org/t/p/w500" + content.poster_path} />
+                                    </CardContent>
+                                    <CardActions>
+                                    </CardActions>
+                                </Card>
                             </div>
                         ))}
                     </Grid>

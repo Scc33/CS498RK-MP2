@@ -25,7 +25,12 @@ class Search extends Component {
   render() {
     return (
       <div className="Search">
-        <TextField id="outlined-basic" label="Title Search" variant="outlined" onChange={this.handleChange} />
+        <TextField
+          id="outlined-basic"
+          label="Title Search"
+          variant="outlined"
+          onChange={this.handleChange}
+        />
       </div>
     );
   }
