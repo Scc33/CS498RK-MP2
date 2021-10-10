@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Search from '../Search';
+import TextField from '@material-ui/core/TextField';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Radio from '@mui/material/Radio';
@@ -28,8 +29,14 @@ class ListView extends Component {
         this.handleOrderChange = this.handleOrderChange.bind(this);
     }
 
+    clear = () => {
+        const titleSearch = ""
+        this.setState( {titleSearch} );
+      }
+
     handleSearchChange(event) {
         const { value } = event.target;
+        this.setState({ titleSearch: value });
         var filter;
         if (this.state.type === "movie") {
             filter = this.state.popularMovies.filter(content => (
@@ -53,6 +60,7 @@ class ListView extends Component {
         this.setState({
             [key]: value
         });
+        this.clear();
         if (value === "movie") {
             if (this.state.order === "descending") {
                 console.log("reversing");
@@ -101,7 +109,13 @@ class ListView extends Component {
         return (
             <div className="App">
                 <Container>
-                        <Search onChange={this.handleSearchChange} />
+                    <TextField
+                        value={this.state.titleSearch}
+                        id="outlined-basic"
+                        label="Title Search"
+                        variant="outlined"
+                        onChange={this.handleSearchChange}
+                    />
                     <FormControl>
                         <RadioGroup
                             aria-label="gender"
