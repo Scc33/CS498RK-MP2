@@ -16,7 +16,8 @@ class ListView extends Component {
     state = {
         filter: [],
         popular: [],
-        type: "movie"
+        type: "movie",
+        order: "ascending"
     }
 
     constructor(props) {
@@ -24,6 +25,7 @@ class ListView extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleTypeChange = this.handleTypeChange.bind(this);
         this.handleSearchChange = this.handleSearchChange.bind(this);
+        this.handleOrderChange = this.handleOrderChange.bind(this);
     }
 
     static propTypes = {
@@ -55,14 +57,8 @@ class ListView extends Component {
     }
 
     handleTypeChange = key => (event, value) => {
-        if (value === "movie") {
-            axios.get('https://api.themoviedb.org/3/movie/popular?api_key=f052c50e624989f8ef4a5acc45dfc7f2&language=en-US&page=1')
-                .then(res => {
-                    const popular = res.data.results;
-                    this.setState({ popular });
-                    const filter = res.data.results;
-                    this.setState({ filter });
-                })
+        if (this.state.type === "movie") {
+            this.setState({ });
         } else {
             axios.get('https://api.themoviedb.org/3/tv/popular?api_key=f052c50e624989f8ef4a5acc45dfc7f2&language=en-US&page=1')
                 .then(res => {
@@ -72,6 +68,15 @@ class ListView extends Component {
                     this.setState({ filter });
                 })
         }
+        this.setState({
+            [key]: value
+        });
+        console.log([key], value, this.state)
+    };
+
+    handleOrderChange = key => (event, value) => {
+        const filter = this.state.filter.reverse();
+        this.setState({ filter });
         this.setState({
             [key]: value
         });
@@ -127,6 +132,7 @@ class ListView extends Component {
                             aria-label="gender"
                             defaultValue="ascending"
                             name="radio-buttons-group"
+                            onChange={this.handleOrderChange("order")}
                         >
                             <FormControlLabel value="ascending" control={<Radio />} label="Ascending" />
                             <FormControlLabel value="decending" control={<Radio />} label="Descending" />
