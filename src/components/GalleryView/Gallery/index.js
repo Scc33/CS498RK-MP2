@@ -1,6 +1,5 @@
 import { Component } from 'react';
-import Header from '../Header';
-import GallerySearch from '../GallerySearch';
+import Search from '../../Search';
 import Results from '../Results';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
@@ -25,7 +24,7 @@ class Gallery extends Component {
   handleSearchChange(event) {
     const { value } = event.target;
     const filtered = this.state.popularMovies.filter(movie => (
-      movie.original_title.toLowerCase().includes(value.toLowerCase())
+      movie.title.toLowerCase().includes(value.toLowerCase())
     ));
     this.setState({ filtered });
   }
@@ -58,8 +57,7 @@ class Gallery extends Component {
   render() {
     return (
       <div className="App">
-        <Header />
-        <GallerySearch onChange={this.handleSearchChange} />
+        <Search onChange={this.handleSearchChange} />
         <Button variant="constrained" id="2" onClick={this.handleGenreChange}>asdf</Button>
         <div dangerouslySetInnerHTML={{__html: this.state.genreButtons}} />
         <Results movies={this.state.filtered} />
