@@ -3,10 +3,15 @@
     width: 100%;
 }
 
+.search-padding {
+    margin-left: 2%;
+}
+
 .bar-container {
     position: fixed;
     width: 80%;
     height: 145px;
+    z-index: 9999;
 }
 
 .search-bar {
@@ -41,6 +46,10 @@
 
 .card {
     padding-bottom: 15px;
+}
+
+.card:hover {
+    opacity: .9;
 }
 
 .card-content {

@@ -138,60 +138,62 @@ class ListView extends Component {
     render() {
         return (
             <div className="search">
-                <Card className="bar-container">
-                    <CardContent>
-                        <div className="search-bar">
-                            <TextField
-                                value={this.state.titleSearch}
-                                id="outlined-basic"
-                                label="Title Search"
-                                variant="outlined"
-                                onChange={this.handleSearchChange}
-                                className="search-size"
-                            />
-                        </div>
-                        <FormControl>
-                            <div className="item">
-                                <RadioGroup
-                                    aria-label="gender"
-                                    defaultValue="movie"
-                                    name="radio-buttons-group"
-                                    onChange={this.handleTypeChange("type")}
-                                >
-                                    <div className="item">
-                                        <FormControlLabel value="movie" control={<Radio />} label="Popular Movies" />
-                                        <FormControlLabel value="tv" control={<Radio />} label="Popular TV Shows" />
-                                    </div>
-                                </RadioGroup>
-                                <RadioGroup
-                                    aria-label="gender"
-                                    defaultValue="ascending"
-                                    name="radio-buttons-group"
-                                    onChange={this.handleOrderChange("order")}
-                                >
-                                    <div className="item">
-                                        <FormControlLabel value="ascending" control={<Radio />} label="Ascending" />
-                                        <FormControlLabel value="descending" control={<Radio />} label="Descending" />
-                                    </div>
-                                </RadioGroup>
-                                <FormControl sx={{ m: 1, minWidth: 240 }}>
-                                    <InputLabel id="demo-simple-select-label">Rating</InputLabel>
-                                    <Select
-                                        labelId="demo-simple-select-label"
-                                        label="rating"
-                                        defaultValue="0"
-                                        onChange={this.handleRatingChange}
-                                    >
-                                        <MenuItem value="0">All Movies</MenuItem>
-                                        <MenuItem value="9">Greater than 9</MenuItem>
-                                        <MenuItem value="8">Greater than 8</MenuItem>
-                                        <MenuItem value="7">Greater than 7</MenuItem>
-                                    </Select>
-                                </FormControl>
+                <div className="search-padding">
+                    <Card className="bar-container">
+                        <CardContent>
+                            <div className="search-bar">
+                                <TextField
+                                    value={this.state.titleSearch}
+                                    id="outlined-basic"
+                                    label="Title Search"
+                                    variant="outlined"
+                                    onChange={this.handleSearchChange}
+                                    className="search-size"
+                                />
                             </div>
-                        </FormControl>
-                    </CardContent>
-                </Card>
+                            <FormControl>
+                                <div className="item">
+                                    <RadioGroup
+                                        aria-label="gender"
+                                        defaultValue="movie"
+                                        name="radio-buttons-group"
+                                        onChange={this.handleTypeChange("type")}
+                                    >
+                                        <div className="item">
+                                            <FormControlLabel value="movie" control={<Radio />} label="Popular Movies" />
+                                            <FormControlLabel value="tv" control={<Radio />} label="Popular TV Shows" />
+                                        </div>
+                                    </RadioGroup>
+                                    <RadioGroup
+                                        aria-label="gender"
+                                        defaultValue="ascending"
+                                        name="radio-buttons-group"
+                                        onChange={this.handleOrderChange("order")}
+                                    >
+                                        <div className="item">
+                                            <FormControlLabel value="ascending" control={<Radio />} label="Ascending" />
+                                            <FormControlLabel value="descending" control={<Radio />} label="Descending" />
+                                        </div>
+                                    </RadioGroup>
+                                    <FormControl sx={{ m: 1, minWidth: 240 }}>
+                                        <InputLabel id="demo-simple-select-label">Rating</InputLabel>
+                                        <Select
+                                            labelId="demo-simple-select-label"
+                                            label="rating"
+                                            defaultValue="0"
+                                            onChange={this.handleRatingChange}
+                                        >
+                                            <MenuItem value="0">All Movies</MenuItem>
+                                            <MenuItem value="9">Greater than 9</MenuItem>
+                                            <MenuItem value="8">Greater than 8</MenuItem>
+                                            <MenuItem value="7">Greater than 7</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </div>
+                            </FormControl>
+                        </CardContent>
+                    </Card>
+                </div>
                 <div className="results">
                     {this.state.filter.map((content) => (
                         <div className="card" key={content.id}>
