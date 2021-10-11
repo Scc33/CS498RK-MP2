@@ -4,26 +4,32 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import Container from '@material-ui/core/Container'
-import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button';
-
+import './App.css';
 import ListView from './components/ListView';
 import Gallery from './components/GalleryView/Gallery';
 import Home from './components/Home';
 
 function App() {
   return (
-    <Router>
-      <Container>
-        <div className="App">
-          <header className="App-header">
-            <h1>Movies</h1>
-            <Grid item>
-              <Button variant="contained" href="/">Home</Button>
-              <Button variant="contained" href="/ListView">Search</Button>
-              <Button variant="contained" href="/Gallery">Gallery</Button>
-            </Grid>
+    <div className="App">
+      <div className="section">
+        <h1 className="header">Movies</h1>
+      </div>
+      <div className="section">
+        <div className="menu">
+          <div className="menu-link">
+            <Button variant="contained" href="/">Home</Button>
+          </div>
+          <div className="menu-link">
+            <Button variant="contained" href="/ListView">Search</Button>
+          </div>
+          <div className="menu-link">
+            <Button variant="contained" href="/Gallery">Gallery</Button>
+          </div>
+        </div>
+        <div className="item">
+          <Router>
             <Switch>
               <Route path="/ListView">
                 <ListView />
@@ -35,10 +41,10 @@ function App() {
                 <Home />
               </Route>
             </Switch>
-          </header>
+          </Router>
         </div>
-      </Container>
-    </Router>
+      </div>
+    </div>
   );
 }
 

@@ -12,6 +12,8 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar } from '@fortawesome/fontawesome-free-solid'
 
 class ListView extends Component {
     state = {
@@ -31,8 +33,8 @@ class ListView extends Component {
 
     clear = () => {
         const titleSearch = ""
-        this.setState( {titleSearch} );
-      }
+        this.setState({ titleSearch });
+    }
 
     handleSearchChange(event) {
         const { value } = event.target;
@@ -108,42 +110,44 @@ class ListView extends Component {
     render() {
         return (
             <div className="App">
-                <Container>
-                    <TextField
-                        value={this.state.titleSearch}
-                        id="outlined-basic"
-                        label="Title Search"
-                        variant="outlined"
-                        onChange={this.handleSearchChange}
-                    />
-                    <FormControl>
-                        <RadioGroup
-                            aria-label="gender"
-                            defaultValue="movie"
-                            name="radio-buttons-group"
-                            onChange={this.handleTypeChange("type")}
-                        >
-                            <FormControlLabel value="movie" control={<Radio />} label="Popular Movies" />
-                            <FormControlLabel value="tv" control={<Radio />} label="Popular TV Shows" />
-                        </RadioGroup>
-                        <RadioGroup
-                            aria-label="gender"
-                            defaultValue="ascending"
-                            name="radio-buttons-group"
-                            onChange={this.handleOrderChange("order")}
-                        >
-                            <FormControlLabel value="ascending" control={<Radio />} label="Ascending" />
-                            <FormControlLabel value="descending" control={<Radio />} label="Descending" />
-                        </RadioGroup>
-                    </FormControl>
+                    <Card sx={{ minWidth: 275, maxWidth: 500 }}>
+                        <TextField
+                            value={this.state.titleSearch}
+                            id="outlined-basic"
+                            label="Title Search"
+                            variant="outlined"
+                            onChange={this.handleSearchChange}
+                        />
+                        <FormControl className="container">
+                            <RadioGroup
+                                aria-label="gender"
+                                defaultValue="movie"
+                                name="radio-buttons-group"
+                                onChange={this.handleTypeChange("type")}
+                                className="row"
+                            >
+                                <FormControlLabel value="movie" control={<Radio />} label="Popular Movies" />
+                                <FormControlLabel value="tv" control={<Radio />} label="Popular TV Shows" />
+                            </RadioGroup>
+                            <RadioGroup
+                                aria-label="gender"
+                                defaultValue="ascending"
+                                name="radio-buttons-group"
+                                onChange={this.handleOrderChange("order")}
+                            >
+                                <FormControlLabel value="ascending" control={<Radio />} label="Ascending" />
+                                <FormControlLabel value="descending" control={<Radio />} label="Descending" />
+                            </RadioGroup>
+                        </FormControl>
+                    </Card>
                     <Grid item>
                         {this.state.filter.map((content) => (
                             <div className="Results-item" key={content.id}>
                                 <Card sx={{ minWidth: 275, maxWidth: 500 }}>
                                     <CardContent>
-                                        {content.overview}
-                                        {content.vote_average}
-                                        {content.vote_count}
+                                        {content.overview} <br />
+                                        {content.vote_average} <FontAwesomeIcon icon={faStar} /> <br />
+                                        {content.vote_count} <br />
                                         {content.release_date}
                                         <img src={"https://image.tmdb.org/t/p/w500" + content.poster_path} />
                                     </CardContent>
@@ -153,7 +157,6 @@ class ListView extends Component {
                             </div>
                         ))}
                     </Grid>
-                </Container>
             </div>
         );
     }
