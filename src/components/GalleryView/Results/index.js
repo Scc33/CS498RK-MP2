@@ -9,10 +9,10 @@ class Results extends Component {
         {this.props.movies.map((movie) => (
           <div className="Results-item" key={movie.original_title}>
             <div>
-              <img src={"https://image.tmdb.org/t/p/w500" + movie.poster_path} />
-            </div>
-            <div>
-              {movie.original_title}
+              <img
+                className="img"
+                src={"https://image.tmdb.org/t/p/w500" + movie.poster_path}
+              />
             </div>
           </div>
         ))}
