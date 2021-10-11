@@ -1,0 +1,44 @@
+.search {
+    padding-top: 25px;
+}
+
+.bar-container {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    width: 80%;
+}
+
+.search-items {
+    width: 75%
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    padding-left: 2px;
+}
+
+.results {
+    padding-top: 275px;
+}
+
+.card {
+    width: 94%;
+    padding-bottom: 15px;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.card-supp-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.img {
+    width: 200px;
+    height: auto;
+}

@@ -12,37 +12,33 @@ import Home from './components/Home';
 
 function App() {
   return (
-    <div className="App">
-      <div className="section">
+    <div className="section">
+      <div className="menu">
         <h1 className="header">Movies</h1>
+        <div className="menu-link">
+          <Button variant="contained" href="/">Home</Button>
+        </div>
+        <div className="menu-link">
+          <Button variant="contained" href="/ListView">Search</Button>
+        </div>
+        <div className="menu-link">
+          <Button variant="contained" href="/Gallery">Gallery</Button>
+        </div>
       </div>
-      <div className="section">
-        <div className="menu">
-          <div className="menu-link">
-            <Button variant="contained" href="/">Home</Button>
-          </div>
-          <div className="menu-link">
-            <Button variant="contained" href="/ListView">Search</Button>
-          </div>
-          <div className="menu-link">
-            <Button variant="contained" href="/Gallery">Gallery</Button>
-          </div>
-        </div>
-        <div className="item">
-          <Router>
-            <Switch>
-              <Route path="/ListView">
-                <ListView />
-              </Route>
-              <Route path="/Gallery">
-                <Gallery />
-              </Route>
-              <Route path="/">
-                <Home />
-              </Route>
-            </Switch>
-          </Router>
-        </div>
+      <div className="item">
+        <Router>
+          <Switch>
+            <Route path="/ListView">
+              <ListView />
+            </Route>
+            <Route path="/Gallery">
+              <Gallery />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </Router>
       </div>
     </div>
   );

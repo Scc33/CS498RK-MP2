@@ -1,14 +1,12 @@
-.app {
-  text-align: center;
-}
-
 .header {
   padding-left: 10px;
+  color: white;
 }
 
 .section {
   display: flex;
   flex-direction: row;
+  background-color: #282c34;
 }
 
 .menu {

@@ -1,8 +1,6 @@
 import { Component } from 'react';
-import PropTypes from "prop-types";
-import Container from '@material-ui/core/Container';
+import './styles.scss';
 import Grid from '@material-ui/core/Grid';
-import Search from '../Search';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -109,54 +107,64 @@ class ListView extends Component {
 
     render() {
         return (
-            <div className="App">
-                    <Card sx={{ minWidth: 275, maxWidth: 500 }}>
+            <div className="search">
+                <Card className="bar-container">
+                    <CardContent>
                         <TextField
                             value={this.state.titleSearch}
                             id="outlined-basic"
                             label="Title Search"
                             variant="outlined"
                             onChange={this.handleSearchChange}
+                            className="search-items"
                         />
-                        <FormControl className="container">
-                            <RadioGroup
-                                aria-label="gender"
-                                defaultValue="movie"
-                                name="radio-buttons-group"
-                                onChange={this.handleTypeChange("type")}
-                                className="row"
-                            >
-                                <FormControlLabel value="movie" control={<Radio />} label="Popular Movies" />
-                                <FormControlLabel value="tv" control={<Radio />} label="Popular TV Shows" />
-                            </RadioGroup>
-                            <RadioGroup
-                                aria-label="gender"
-                                defaultValue="ascending"
-                                name="radio-buttons-group"
-                                onChange={this.handleOrderChange("order")}
-                            >
-                                <FormControlLabel value="ascending" control={<Radio />} label="Ascending" />
-                                <FormControlLabel value="descending" control={<Radio />} label="Descending" />
-                            </RadioGroup>
-                        </FormControl>
-                    </Card>
-                    <Grid item>
-                        {this.state.filter.map((content) => (
-                            <div className="Results-item" key={content.id}>
-                                <Card sx={{ minWidth: 275, maxWidth: 500 }}>
-                                    <CardContent>
-                                        {content.overview} <br />
-                                        {content.vote_average} <FontAwesomeIcon icon={faStar} /> <br />
-                                        {content.vote_count} <br />
-                                        {content.release_date}
-                                        <img src={"https://image.tmdb.org/t/p/w500" + content.poster_path} />
-                                    </CardContent>
-                                    <CardActions>
-                                    </CardActions>
-                                </Card>
-                            </div>
-                        ))}
-                    </Grid>
+                        <div className="item">
+                            <FormControl className="item">
+                                <RadioGroup
+                                    aria-label="gender"
+                                    defaultValue="movie"
+                                    name="radio-buttons-group"
+                                    onChange={this.handleTypeChange("type")}
+                                >
+                                    <FormControlLabel value="movie" control={<Radio />} label="Popular Movies" />
+                                    <FormControlLabel value="tv" control={<Radio />} label="Popular TV Shows" />
+                                </RadioGroup>
+                                <RadioGroup
+                                    aria-label="gender"
+                                    defaultValue="ascending"
+                                    name="radio-buttons-group"
+                                    onChange={this.handleOrderChange("order")}
+                                >
+                                    <FormControlLabel value="ascending" control={<Radio />} label="Ascending" />
+                                    <FormControlLabel value="descending" control={<Radio />} label="Descending" />
+                                </RadioGroup>
+                            </FormControl>
+                        </div>
+                    </CardContent>
+                </Card>
+                <div className="results">
+                    {this.state.filter.map((content) => (
+                        <div className="card" key={content.id}>
+                            <Card>
+                                <CardContent className="card-content">
+                                    <div className="card-supp-details">
+                                        {content.overview}
+                                        <div>
+                                            Average Score: {content.vote_average} <FontAwesomeIcon icon={faStar} />
+                                        </div>
+                                        <div>
+                                            Number of Votes: {content.vote_count}
+                                        </div>
+                                        <div>
+                                            Release Date: {content.release_date}
+                                        </div>
+                                    </div>
+                                    <img className="img" src={"https://image.tmdb.org/t/p/w500" + content.poster_path} />
+                                </CardContent>
+                            </Card>
+                        </div>
+                    ))}
+                </div>
             </div>
         );
     }
