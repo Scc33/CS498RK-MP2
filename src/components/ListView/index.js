@@ -96,7 +96,7 @@ class ListView extends Component {
         });
     };
 
-    handleRatingChange(event){
+    handleRatingChange(event) {
         const { value } = event.target;
         this.setState({ rating: value });
         var filter;
@@ -174,7 +174,7 @@ class ListView extends Component {
                                         <FormControlLabel value="descending" control={<Radio />} label="Descending" />
                                     </div>
                                 </RadioGroup>
-                                <FormControl sx={{ m: 1, minWidth: 120 }}>
+                                <FormControl sx={{ m: 1, minWidth: 240 }}>
                                     <InputLabel id="demo-simple-select-label">Rating</InputLabel>
                                     <Select
                                         labelId="demo-simple-select-label"
@@ -214,6 +214,13 @@ class ListView extends Component {
                             </Card>
                         </div>
                     ))}
+                    <div className="card" key="end">
+                        <Card>
+                            <CardContent className="card-content">
+                                <p>End of Results. Visit <a href="https://www.themoviedb.org/?language=en-US">TMDB</a> for more great content.</p>
+                            </CardContent>
+                        </Card>
+                    </div>
                 </div>
             </div>
         );

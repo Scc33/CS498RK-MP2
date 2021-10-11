@@ -1,10 +1,12 @@
 .search {
     padding-top: 25px;
+    width: 100%;
 }
 
 .bar-container {
     position: fixed;
     width: 80%;
+    height: 145px;
 }
 
 .search-bar {
@@ -21,15 +23,23 @@
 .item {
     display: flex;
     flex-direction: row;
-    width: 100%
+    width: 100%;
+    margin-right: 0;
+    align-items: center;
+    padding-right: 20px;
 }
 
 .results {
-    padding-top: 150px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    padding-top: 160px;
+    width: 100%;
+    margin-right: auto;
 }
 
 .card {
-    width: 94%;
     padding-bottom: 15px;
 }
 
