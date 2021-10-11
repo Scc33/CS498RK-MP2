@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
 import {
-  BrowserRouter as Router,
-  Switch,
   Route,
 } from "react-router-dom";
 import Button from '@material-ui/core/Button';
@@ -40,7 +38,7 @@ class App extends Component {
       details.push(<Route path={"/Content/" + this.state.popularTVs[i].id}>
         <DetailView
           key={i}
-          ranking={i+1}
+          ranking={i + 1}
           tv={this.state.popularTVs[i]}
           prev={"/Content/" + this.state.popularTVs[p].id}
           next={"/Content/" + this.state.popularTVs[n].id}
@@ -59,7 +57,22 @@ class App extends Component {
           </div>
         </div>
         <div className="item">
-          <Router>
+          <Route path="/" exact component={ListView} />
+          <Route path="/ListView" exact component={ListView} />
+          <Route path="/Gallery" exact component={Gallery} />
+          {details}
+        </div>
+      </div>
+    )
+  }
+}
+
+/*<BrowserRouter basename="/calendar">
+            <Route path="/Gallery" component={Gallery} />
+            <Route path="/" component={ListView} />
+          </BrowserRouter>*/
+
+/*<Router>
             <Switch>
               <Route path="/Gallery">
                 <Gallery />
@@ -72,11 +85,6 @@ class App extends Component {
                 <ListView />
               </Route>
             </Switch>
-          </Router>
-        </div>
-      </div>
-    )
-  }
-}
+          </Router>*/
 
 export default App;
