@@ -138,6 +138,18 @@ class ListView extends Component {
                                             <MenuItem value="7">Greater than 7</MenuItem>
                                         </Select>
                                     </FormControl>
+                                    <FormControl sx={{ m: 1, minWidth: 240 }}>
+                                        <InputLabel id="demo-simple-select-label">Sort By</InputLabel>
+                                        <Select
+                                            labelId="demo-simple-select-label"
+                                            label="sort"
+                                            defaultValue="pop"
+                                            onChange={this.handleRatingChange}
+                                        >
+                                            <MenuItem value="pop">Popularity</MenuItem>
+                                            <MenuItem value="rate">Rating</MenuItem>
+                                        </Select>
+                                    </FormControl>
                                 </div>
                             </FormControl>
                         </CardContent>
@@ -158,7 +170,7 @@ class ListView extends Component {
                                                 Number of Votes: {content.vote_count}
                                             </div>
                                             <div>
-                                                Release Date: {content.release_date}
+                                                Release Date: {content.first_air_date}
                                             </div>
                                         </div>
                                         <img className="img" src={"https://image.tmdb.org/t/p/w500" + content.poster_path} />

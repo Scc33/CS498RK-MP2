@@ -10,6 +10,7 @@ export default class DetailView extends Component {
     render() {
         return (
             <section>
+                <h1>{this.props.ranking}</h1>
                 <h1>{this.props.tv.name}</h1>
                 {this.props.tv.overview}
                 <div>

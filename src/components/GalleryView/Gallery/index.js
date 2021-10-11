@@ -36,16 +36,9 @@ class Gallery extends Component {
         console.log(res.data.genres);
         const genres = res.data.genres;
         this.setState({ genres: genres })
-        /*var genres = res.data.genres;
-        var i;
-        var loopData = ''
-        for (i = 0; i < genres.length; i++) {
-          loopData += `<Button variant="constrained" id=${genres[i].id} onClick=this.handleGenreChange>${genres[i].name}</Button>`
-        }
-        this.setState({ genreButtons: loopData })*/
       })
 
-    return axios.get('https://api.themoviedb.org/3/movie/popular?api_key=f052c50e624989f8ef4a5acc45dfc7f2&language=en-US&page=1')
+    return axios.get('https://api.themoviedb.org/3/tv/popular?api_key=f052c50e624989f8ef4a5acc45dfc7f2&language=en-US&page=1')
       .then(res => {
         const filtered = res.data.results;
         this.setState({ filtered });
@@ -59,8 +52,7 @@ class Gallery extends Component {
       <div className="App">
         <Search onChange={this.handleSearchChange} />
         <Button variant="constrained" id="2" onClick={this.handleGenreChange}>asdf</Button>
-        <div dangerouslySetInnerHTML={{__html: this.state.genreButtons}} />
-        <Results movies={this.state.filtered} />
+        <Results content={this.state.filtered} />
       </div>
     );
   }

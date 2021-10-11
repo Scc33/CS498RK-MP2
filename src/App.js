@@ -41,6 +41,7 @@ class App extends Component {
       details.push(<Route path={"/Content/" + this.state.popularTVs[i].id}>
         <DetailView
           key={i}
+          ranking={i+1}
           tv={this.state.popularTVs[i]}
           prev={"/Content/" + this.state.popularTVs[p].id}
           next={"/Content/" + this.state.popularTVs[n].id}
