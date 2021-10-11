@@ -3,24 +3,29 @@
 }
 
 .bar-container {
-    display: flex;
-    flex-direction: column;
     position: fixed;
     width: 80%;
 }
 
-.search-items {
-    width: 75%
+.search-bar {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    min-width: 100%;
+}
+
+.search-size {
+    width:100%;
 }
 
 .item {
     display: flex;
-    flex-direction: column;
-    padding-left: 2px;
+    flex-direction: row;
+    width: 100%
 }
 
 .results {
-    padding-top: 275px;
+    padding-top: 150px;
 }
 
 .card {

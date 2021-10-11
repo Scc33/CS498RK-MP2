@@ -110,24 +110,28 @@ class ListView extends Component {
             <div className="search">
                 <Card className="bar-container">
                     <CardContent>
-                        <TextField
-                            value={this.state.titleSearch}
-                            id="outlined-basic"
-                            label="Title Search"
-                            variant="outlined"
-                            onChange={this.handleSearchChange}
-                            className="search-items"
-                        />
-                        <div className="item">
-                            <FormControl className="item">
+                        <div className="search-bar">
+                            <TextField
+                                value={this.state.titleSearch}
+                                id="outlined-basic"
+                                label="Title Search"
+                                variant="outlined"
+                                onChange={this.handleSearchChange}
+                                className="search-size"
+                            />
+                        </div>
+                        <FormControl>
+                            <div className="item">
                                 <RadioGroup
                                     aria-label="gender"
                                     defaultValue="movie"
                                     name="radio-buttons-group"
                                     onChange={this.handleTypeChange("type")}
                                 >
-                                    <FormControlLabel value="movie" control={<Radio />} label="Popular Movies" />
-                                    <FormControlLabel value="tv" control={<Radio />} label="Popular TV Shows" />
+                                    <div className="item">
+                                        <FormControlLabel value="movie" control={<Radio />} label="Popular Movies" />
+                                        <FormControlLabel value="tv" control={<Radio />} label="Popular TV Shows" />
+                                    </div>
                                 </RadioGroup>
                                 <RadioGroup
                                     aria-label="gender"
@@ -135,11 +139,13 @@ class ListView extends Component {
                                     name="radio-buttons-group"
                                     onChange={this.handleOrderChange("order")}
                                 >
-                                    <FormControlLabel value="ascending" control={<Radio />} label="Ascending" />
-                                    <FormControlLabel value="descending" control={<Radio />} label="Descending" />
+                                    <div className="item">
+                                        <FormControlLabel value="ascending" control={<Radio />} label="Ascending" />
+                                        <FormControlLabel value="descending" control={<Radio />} label="Descending" />
+                                    </div>
                                 </RadioGroup>
-                            </FormControl>
-                        </div>
+                            </div>
+                        </FormControl>
                     </CardContent>
                 </Card>
                 <div className="results">
