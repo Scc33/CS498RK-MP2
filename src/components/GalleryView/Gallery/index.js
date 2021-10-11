@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import './styles.scss';
-import Search from '../../Search';
 import Results from '../Results';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
