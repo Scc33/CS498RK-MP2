@@ -3,10 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/fontawesome-free-solid'
 
 export default class DetailView extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <section>
@@ -25,7 +21,7 @@ export default class DetailView extends Component {
                 {this.props.tv.origin_country}
                 {this.props.tv.original_language}
                 {this.props.tv.popularity}
-                <img className="img" src={"https://image.tmdb.org/t/p/w500" + this.props.tv.poster_path} />
+                <img className="img" src={"https://image.tmdb.org/t/p/w500" + this.props.tv.poster_path} alt={this.props.tv.name}/>
                 {this.props.tv.prev}
                 <a href={this.props.prev}>Previous</a>
                 <a href={this.props.next}>Next</a>

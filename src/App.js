@@ -9,7 +9,6 @@ import Button from '@material-ui/core/Button';
 import './App.css';
 import ListView from './components/ListView';
 import Gallery from './components/GalleryView/Gallery';
-import Home from './components/Home';
 import axios from 'axios'
 import DetailView from './components/DetailView';
 

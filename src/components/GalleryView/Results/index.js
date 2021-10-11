@@ -12,6 +12,7 @@ class Results extends Component {
               <img
                 className="img"
                 src={"https://image.tmdb.org/t/p/w500" + show.poster_path}
+                alt={show.title}
               />
             </a>
           </div>

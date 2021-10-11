@@ -173,7 +173,7 @@ class ListView extends Component {
                                                 Release Date: {content.first_air_date}
                                             </div>
                                         </div>
-                                        <img className="img" src={"https://image.tmdb.org/t/p/w500" + content.poster_path} />
+                                        <img className="img" src={"https://image.tmdb.org/t/p/w500" + content.poster_path} alt={content.name}/>
                                     </CardContent>
                                 </Card>
                             </a>
