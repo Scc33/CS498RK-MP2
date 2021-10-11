@@ -7,7 +7,6 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import axios from 'axios';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
@@ -19,7 +18,7 @@ class ListView extends Component {
         filter: [],
         popularMovies: [],
         popularTVs: [],
-        type: "movie",
+        type: "",
         order: "ascending",
         rating: "0",
         titleSearch: ""
@@ -27,6 +26,15 @@ class ListView extends Component {
 
     constructor(props) {
         super(props);
+        console.log("construct",props);
+        this.state.popularMovies = props.popularMovies;
+        this.state.popularTVs = props.popularTVs;
+        this.type = props.type;
+        if (props.type === "movie") {
+            this.state.filter = props.popularMovies;
+        } else {
+            this.state.filter = props.popularTVs;
+        }
         this.handleTypeChange = this.handleTypeChange.bind(this);
         this.handleSearchChange = this.handleSearchChange.bind(this);
         this.handleOrderChange = this.handleOrderChange.bind(this);
@@ -119,23 +127,8 @@ class ListView extends Component {
         this.setState({ filter });
     }
 
-    //API: f052c50e624989f8ef4a5acc45dfc7f2
-    componentDidMount() {
-        axios.get('https://api.themoviedb.org/3/movie/popular?api_key=f052c50e624989f8ef4a5acc45dfc7f2&language=en-US&page=1')
-            .then(res => {
-                const popularMovies = res.data.results;
-                this.setState({ popularMovies });
-                const filter = res.data.results;
-                this.setState({ filter });
-            })
-        axios.get('https://api.themoviedb.org/3/tv/popular?api_key=f052c50e624989f8ef4a5acc45dfc7f2&language=en-US&page=1')
-            .then(res => {
-                const popularTVs = res.data.results;
-                this.setState({ popularTVs });
-            })
-    }
-
     render() {
+        console.log("search", this.state)
         return (
             <div className="search">
                 <div className="search-padding">
@@ -153,17 +146,7 @@ class ListView extends Component {
                             </div>
                             <FormControl>
                                 <div className="item">
-                                    <RadioGroup
-                                        aria-label="gender"
-                                        defaultValue="movie"
-                                        name="radio-buttons-group"
-                                        onChange={this.handleTypeChange("type")}
-                                    >
-                                        <div className="item">
-                                            <FormControlLabel value="movie" control={<Radio />} label="Popular Movies" />
-                                            <FormControlLabel value="tv" control={<Radio />} label="Popular TV Shows" />
-                                        </div>
-                                    </RadioGroup>
+                                    
                                     <RadioGroup
                                         aria-label="gender"
                                         defaultValue="ascending"
