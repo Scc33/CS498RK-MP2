@@ -94,7 +94,6 @@ class ListView extends Component {
     }
 
     render() {
-        console.log("search", this.state)
         return (
             <div className="search">
                 <div className="search-padding">

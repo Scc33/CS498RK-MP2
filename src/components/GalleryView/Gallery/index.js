@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import './styles.scss';
 import Search from '../../Search';
 import Results from '../Results';
 import Button from '@material-ui/core/Button';
@@ -6,19 +7,14 @@ import axios from 'axios';
 
 class Gallery extends Component {
   state = {
-    filtered: [],
-    popularMovies: [],
+    shows: [],
     genres: [],
-    genreButtons: '',
-    handleGenreChange(event) {
-      console.log(this.state);
-      console.log(event)
-    }
   }
 
   constructor(props) {
     super(props);
     this.handleSearchChange = this.handleSearchChange.bind(this);
+    this.handleGenreChange = this.handleGenreChange.bind(this);
   }
 
   handleSearchChange(event) {
@@ -29,30 +25,45 @@ class Gallery extends Component {
     this.setState({ filtered });
   }
 
+  handleGenreChange() {
+
+  }
+
   componentDidMount() {
     //API: f052c50e624989f8ef4a5acc45dfc7f2
-    axios.get('https://api.themoviedb.org/3/genre/movie/list?api_key=f052c50e624989f8ef4a5acc45dfc7f2&language=en-US')
+    axios.get('https://api.themoviedb.org/3/genre/tv/list?api_key=f052c50e624989f8ef4a5acc45dfc7f2&language=en-US')
       .then(res => {
-        console.log(res.data.genres);
         const genres = res.data.genres;
-        this.setState({ genres: genres })
+        this.setState({ genres })
       })
 
     return axios.get('https://api.themoviedb.org/3/tv/popular?api_key=f052c50e624989f8ef4a5acc45dfc7f2&language=en-US&page=1')
       .then(res => {
-        const filtered = res.data.results;
-        this.setState({ filtered });
-        const popularMovies = res.data.results;
-        this.setState({ popularMovies });
+        const shows = res.data.results;
+        this.setState({ shows });
       })
   }
 
   render() {
+    var genres = [];
+    for (var i = 0; i < this.state.genres.length; i++) {
+      genres.push(
+        <Button
+          variant="constrained"
+          key={this.state.genres[i].id}
+          onClick={this.handleGenreChange}
+          className="genre-buttons"
+        >
+          {this.state.genres[i].name}
+        </Button>
+      )
+    }
     return (
       <div className="App">
-        <Search onChange={this.handleSearchChange} />
-        <Button variant="constrained" id="2" onClick={this.handleGenreChange}>asdf</Button>
-        <Results content={this.state.filtered} />
+        <div className="genres">
+          {genres}
+        </div>
+        <Results content={this.state.shows} />
       </div>
     );
   }
