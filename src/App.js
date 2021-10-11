@@ -28,6 +28,25 @@ class App extends Component {
   }
 
   render() {
+    var details = [];
+    for (var i = 0; i < this.state.popularTVs.length; i++) {
+      var p = i - 1;
+      var n = i + 1;
+      if (i === 0) {
+        p = this.state.popularTVs.length - 1;
+      }
+      if (i === this.state.popularTVs.length - 1) {
+        n = 0;
+      }
+      details.push(<Route path={"/Content/" + this.state.popularTVs[i].id}>
+        <DetailView
+          key={i}
+          tv={this.state.popularTVs[i]}
+          prev={"/Content/" + this.state.popularTVs[p].id}
+          next={"/Content/" + this.state.popularTVs[n].id}
+        />
+      </Route >);
+    }
     return (
       <div className="section">
         <div className="menu">
@@ -45,11 +64,7 @@ class App extends Component {
               <Route path="/Gallery">
                 <Gallery />
               </Route>
-              {this.state.popularTVs.map((content) => (
-                <Route path={"/Content/" + content.id}>
-                  <DetailView />
-                </Route>
-              ))}
+              {details}
               <Route path="/ListView">
                 <ListView />
               </Route>
