@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Modal from 'react-awesome-modal';
 
-export default class MovieModal extends Component {
+export default class DetailView extends Component {
     constructor(props) {
         super(props);
         this.state = {

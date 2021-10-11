@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import PropTypes from "prop-types";
 import './styles.scss';
+import DetailView from '../../DetailView/'
 
 class Results extends Component {
   render() {
@@ -14,6 +15,7 @@ class Results extends Component {
                 src={"https://image.tmdb.org/t/p/w500" + movie.poster_path}
               />
             </div>
+            <DetailView></DetailView>
           </div>
         ))}
       </div>
