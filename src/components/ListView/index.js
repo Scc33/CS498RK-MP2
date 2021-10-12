@@ -168,16 +168,10 @@ class ListView extends Component {
                                 <Card>
                                     <CardContent className="card-content">
                                         <div className="card-supp-details">
-                                            {content.overview}
-                                            <div>
+                                            <h1> {content.name} </h1>
+                                            <h3>
                                                 Average Score: {content.vote_average} <FontAwesomeIcon icon={faStar} />
-                                            </div>
-                                            <div>
-                                                Number of Votes: {content.vote_count}
-                                            </div>
-                                            <div>
-                                                Release Date: {content.first_air_date}
-                                            </div>
+                                            </h3>
                                         </div>
                                         <img className="img" src={"https://image.tmdb.org/t/p/w500" + content.poster_path} alt={content.name} />
                                     </CardContent>
