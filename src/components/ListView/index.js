@@ -37,6 +37,10 @@ class ListView extends Component {
         axios.get('https://api.themoviedb.org/3/tv/popular?api_key=f052c50e624989f8ef4a5acc45dfc7f2&language=en-US&page=1')
             .then(res => {
                 const popularTVs = res.data.results;
+                for (var i = 0; i < popularTVs.length; i++) {
+                    popularTVs[i]["rank"] = i;
+                }
+                console.log(popularTVs);
                 this.setState({ popularTVs });
                 this.setState({ filter: popularTVs })
             })
@@ -54,6 +58,11 @@ class ListView extends Component {
             content.name.toLowerCase().includes(value.toLowerCase()) &&
             content.vote_average >= parseFloat(this.state.rating)
         ));
+        if (this.state.sorted === "pop") {
+            filter.sort(function (a, b) { return b.popularity - a.popularity });
+        } else {
+            filter.sort(function (a, b) { return b.vote_average - a.vote_average });
+        }
         if (this.state.order === "descending") {
             filter.reverse();
         }
@@ -71,9 +80,15 @@ class ListView extends Component {
     handleRatingChange(event) {
         const { value } = event.target;
         this.setState({ rating: value });
-        var filter = this.state.filter.filter(content => (
+        var filter = this.state.popularTVs.filter(content => (
+            content.name.toLowerCase().includes(this.state.titleSearch.toLowerCase()) &&
             content.vote_average >= parseFloat(value)
         ));
+        if (this.state.sorted === "pop") {
+            filter.sort(function (a, b) { return b.popularity - a.popularity });
+        } else {
+            filter.sort(function (a, b) { return b.vote_average - a.vote_average });
+        }
         if (this.state.order === "descending") {
             filter.reverse();
         }
@@ -168,7 +183,7 @@ class ListView extends Component {
                                 <Card>
                                     <CardContent className="card-content">
                                         <div className="card-supp-details">
-                                            <h1> {content.name} </h1>
+                                            <h1> {content.rank+1 + " " + content.name} </h1>
                                             <h3>
                                                 Average Score: {content.vote_average} <FontAwesomeIcon icon={faStar} />
                                             </h3>
