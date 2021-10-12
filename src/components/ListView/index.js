@@ -19,6 +19,7 @@ class ListView extends Component {
         filter: [],
         popularTVs: [],
         order: "ascending",
+        sorted: "pop",
         rating: "0",
         titleSearch: ""
     }
@@ -29,6 +30,7 @@ class ListView extends Component {
         this.handleSearchChange = this.handleSearchChange.bind(this);
         this.handleOrderChange = this.handleOrderChange.bind(this);
         this.handleRatingChange = this.handleRatingChange.bind(this);
+        this.handleSortByChange = this.handleSortByChange.bind(this);
     }
 
     //API: f052c50e624989f8ef4a5acc45dfc7f2
@@ -93,6 +95,24 @@ class ListView extends Component {
         this.setState({ filter });
     }
 
+    handleSortByChange(event) {
+        const { value } = event.target;
+        this.setState({sorted: value});
+        var filter = this.state.filter.slice();
+        console.log("before",filter);
+        
+        if (value === "pop") {
+            filter.sort(function(a, b) { return b.popularity - a.popularity}); 
+        } else {
+            filter.sort(function(a, b) { return b.vote_average - a.vote_average}); 
+        }
+        if (this.state.order === "descending") {
+            filter.reverse();
+        }
+        console.log("after",filter);
+        this.setState({ filter });
+    }
+
     render() {
         return (
             <div className="search">
@@ -143,7 +163,7 @@ class ListView extends Component {
                                             labelId="demo-simple-select-label"
                                             label="sort"
                                             defaultValue="pop"
-                                            onChange={this.handleRatingChange}
+                                            onChange={this.handleSortByChange}
                                         >
                                             <MenuItem value="pop">Popularity</MenuItem>
                                             <MenuItem value="rate">Rating</MenuItem>

@@ -35,9 +35,9 @@ class App extends Component {
       if (i === this.state.popularTVs.length - 1) {
         n = 0;
       }
-      details.push(<Route path={"/mp2/Content/" + this.state.popularTVs[i].id}>
+      details.push(<Route key={this.state.popularTVs[i].id} path={"/mp2/Content/" + this.state.popularTVs[i].id}>
         <DetailView
-          key={i}
+          key={this.state.popularTVs[i].id}
           ranking={i + 1}
           tv={this.state.popularTVs[i]}
           prev={"/mp2/Content/" + this.state.popularTVs[p].id}
@@ -66,25 +66,5 @@ class App extends Component {
     )
   }
 }
-
-/*<BrowserRouter basename="/calendar">
-            <Route path="/Gallery" component={Gallery} />
-            <Route path="/" component={ListView} />
-          </BrowserRouter>*/
-
-/*<Router>
-            <Switch>
-              <Route path="/Gallery">
-                <Gallery />
-              </Route>
-              {details}
-              <Route path="/ListView">
-                <ListView />
-              </Route>
-              <Route path="/">
-                <ListView />
-              </Route>
-            </Switch>
-          </Router>*/
 
 export default App;
