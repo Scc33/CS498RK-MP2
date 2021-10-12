@@ -8,24 +8,23 @@ class Gallery extends Component {
   state = {
     shows: [],
     genres: [],
+    filtered: []
   }
 
   constructor(props) {
     super(props);
-    this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleGenreChange = this.handleGenreChange.bind(this);
   }
 
-  handleSearchChange(event) {
-    const { value } = event.target;
-    const filtered = this.state.popularMovies.filter(movie => (
-      movie.title.toLowerCase().includes(value.toLowerCase())
-    ));
-    this.setState({ filtered });
-  }
-
-  handleGenreChange() {
-
+  handleGenreChange = key => (event, value) => {
+    if (key == -1) {
+      this.setState({ filtered: this.state.shows })
+    } else {
+      const filtered = this.state.shows.filter(show => (
+        show.genre_ids.includes(key)
+      ));
+      this.setState({ filtered });
+    }
   }
 
   componentDidMount() {
@@ -40,6 +39,7 @@ class Gallery extends Component {
       .then(res => {
         const shows = res.data.results;
         this.setState({ shows });
+        this.setState({ filtered: shows });
       })
   }
 
@@ -47,22 +47,29 @@ class Gallery extends Component {
     var genres = [];
     for (var i = 0; i < this.state.genres.length; i++) {
       genres.push(
-        <Button
-          variant="constrained"
-          key={this.state.genres[i].id}
-          onClick={this.handleGenreChange}
-          className="genre-buttons"
-        >
-          {this.state.genres[i].name}
-        </Button>
+        <div className="genre-button" key={this.state.genres[i].id}>
+          <Button
+            variant="contained"
+            id={this.state.genres[i].id}
+            onClick={this.handleGenreChange(this.state.genres[i].id)}
+          >
+            {this.state.genres[i].name}
+          </Button>
+        </div>
       )
     }
     return (
       <div className="App">
+        <h2 className="title">Genres</h2>
         <div className="genres">
+        <Button
+            variant="contained"
+            id={-1}
+            onClick={this.handleGenreChange(-1)}
+          >All Genres</Button>
           {genres}
         </div>
-        <Results content={this.state.shows} />
+        <Results content={this.state.filtered} />
       </div>
     );
   }

@@ -26,7 +26,6 @@ class ListView extends Component {
 
     constructor(props) {
         super(props);
-        this.handleTypeChange = this.handleTypeChange.bind(this);
         this.handleSearchChange = this.handleSearchChange.bind(this);
         this.handleOrderChange = this.handleOrderChange.bind(this);
         this.handleRatingChange = this.handleRatingChange.bind(this);
@@ -61,20 +60,6 @@ class ListView extends Component {
         this.setState({ filter });
     }
 
-    handleTypeChange = key => (event, value) => {
-        this.setState({
-            [key]: value
-        });
-        this.clear();
-        if (this.state.order === "descending") {
-            const filter = this.state.popularTVs.slice().reverse();
-            this.setState({ filter });
-        } else {
-            const filter = this.state.popularTVs;
-            this.setState({ filter });
-        }
-    };
-
     handleOrderChange = key => (event, value) => {
         const filter = this.state.filter.slice().reverse();
         this.setState({ filter });
@@ -86,7 +71,7 @@ class ListView extends Component {
     handleRatingChange(event) {
         const { value } = event.target;
         this.setState({ rating: value });
-        var filter = this.state.popularTVs.filter(content => (
+        var filter = this.state.filter.filter(content => (
             content.vote_average >= parseFloat(value)
         ));
         if (this.state.order === "descending") {
@@ -97,19 +82,19 @@ class ListView extends Component {
 
     handleSortByChange(event) {
         const { value } = event.target;
-        this.setState({sorted: value});
+        this.setState({ sorted: value });
         var filter = this.state.filter.slice();
-        console.log("before",filter);
-        
+        console.log("before", filter);
+
         if (value === "pop") {
-            filter.sort(function(a, b) { return b.popularity - a.popularity}); 
+            filter.sort(function (a, b) { return b.popularity - a.popularity });
         } else {
-            filter.sort(function(a, b) { return b.vote_average - a.vote_average}); 
+            filter.sort(function (a, b) { return b.vote_average - a.vote_average });
         }
         if (this.state.order === "descending") {
             filter.reverse();
         }
-        console.log("after",filter);
+        console.log("after", filter);
         this.setState({ filter });
     }
 
@@ -131,7 +116,6 @@ class ListView extends Component {
                             </div>
                             <FormControl>
                                 <div className="item">
-
                                     <RadioGroup
                                         aria-label="gender"
                                         defaultValue="ascending"
@@ -143,32 +127,38 @@ class ListView extends Component {
                                             <FormControlLabel value="descending" control={<Radio />} label="Descending" />
                                         </div>
                                     </RadioGroup>
-                                    <FormControl sx={{ m: 1, minWidth: 240 }}>
-                                        <InputLabel id="demo-simple-select-label">Rating</InputLabel>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            label="rating"
-                                            defaultValue="0"
-                                            onChange={this.handleRatingChange}
-                                        >
-                                            <MenuItem value="0">All Shows</MenuItem>
-                                            <MenuItem value="9">Greater than 9</MenuItem>
-                                            <MenuItem value="8">Greater than 8</MenuItem>
-                                            <MenuItem value="7">Greater than 7</MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                    <FormControl sx={{ m: 1, minWidth: 240 }}>
-                                        <InputLabel id="demo-simple-select-label">Sort By</InputLabel>
-                                        <Select
-                                            labelId="demo-simple-select-label"
-                                            label="sort"
-                                            defaultValue="pop"
-                                            onChange={this.handleSortByChange}
-                                        >
-                                            <MenuItem value="pop">Popularity</MenuItem>
-                                            <MenuItem value="rate">Rating</MenuItem>
-                                        </Select>
-                                    </FormControl>
+                                    <div className="bar">
+                                        <FormControl className="bar">
+                                            <InputLabel id="demo-simple-select-label">Rating</InputLabel>
+                                            <Select
+                                                labelId="demo-simple-select-label"
+                                                label="rating"
+                                                defaultValue="0"
+                                                onChange={this.handleRatingChange}
+                                                className="bar-input"
+                                            >
+                                                <MenuItem value="0">All Shows</MenuItem>
+                                                <MenuItem value="9">Greater than 9</MenuItem>
+                                                <MenuItem value="8">Greater than 8</MenuItem>
+                                                <MenuItem value="7">Greater than 7</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                    </div>
+                                    <div className="bar">
+                                        <FormControl className="bar">
+                                            <InputLabel id="demo-simple-select-label">Sort By</InputLabel>
+                                            <Select
+                                                labelId="demo-simple-select-label"
+                                                label="sort"
+                                                defaultValue="pop"
+                                                onChange={this.handleSortByChange}
+                                                className="bar-input"
+                                            >
+                                                <MenuItem value="pop">Popularity</MenuItem>
+                                                <MenuItem value="rate">Rating</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                    </div>
                                 </div>
                             </FormControl>
                         </CardContent>
@@ -192,7 +182,7 @@ class ListView extends Component {
                                                 Release Date: {content.first_air_date}
                                             </div>
                                         </div>
-                                        <img className="img" src={"https://image.tmdb.org/t/p/w500" + content.poster_path} alt={content.name}/>
+                                        <img className="img" src={"https://image.tmdb.org/t/p/w500" + content.poster_path} alt={content.name} />
                                     </CardContent>
                                 </Card>
                             </a>

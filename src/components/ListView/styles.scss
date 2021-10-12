@@ -4,7 +4,8 @@
 }
 
 .search-padding {
-    margin-left: 2%;
+    margin-left: .2%;
+    background-color: #e0e0e0;
 }
 
 .bar-container {
@@ -28,10 +29,18 @@
 .item {
     display: flex;
     flex-direction: row;
+    margin-top: 10px;
     width: 100%;
-    margin-right: 0;
     align-items: center;
-    padding-right: 20px;
+    padding-right: 80px;
+}
+
+.bar {
+    margin-left: 20px;
+}
+
+.bar-input {
+    min-width: 240px;
 }
 
 .results {
@@ -55,6 +64,7 @@
 .card-content {
     display: flex;
     flex-direction: row;
+    background-color: #e0e0e0;
 }
 
 .card-supp-details {

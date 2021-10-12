@@ -25,7 +25,6 @@ class Results extends Component {
 Results.propTypes = {
   content: PropTypes.arrayOf(
     PropTypes.shape({
-      original_title: PropTypes.string.isRequired,
       poster_path: PropTypes.string.isRequired
     })
   ).isRequired

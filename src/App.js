@@ -48,7 +48,7 @@ class App extends Component {
     return (
       <div className="section">
         <div className="menu">
-          <h1 className="header">Movies</h1>
+          <h1 className="header">Popular TV</h1>
           <div className="menu-link">
             <Button variant="contained" href="/mp2/ListView">Search</Button>
           </div>

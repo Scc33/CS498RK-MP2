@@ -2,9 +2,17 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
     margin-top: 50px;
 }
 
-.genre-buttons {
+.title {
     color: white;
 }
+
+.genre-button {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
