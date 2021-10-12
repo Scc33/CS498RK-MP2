@@ -63,3 +63,11 @@ DetailView.propTypes = {
     next: PropTypes.string.isRequired,
     tv: PropTypes.object.isRequired
 };
+
+DetailView.defaultProps = {
+    ranking: 0,
+    prev: "404",
+    next: "404",
+    tv: []
+  };
+  

@@ -12,7 +12,7 @@ class Results extends Component {
               <img
                 className="img"
                 src={"https://image.tmdb.org/t/p/w500" + show.poster_path}
-                alt={show.title}
+                alt={show.name}
               />
             </a>
           </div>
@@ -25,7 +25,9 @@ class Results extends Component {
 Results.propTypes = {
   content: PropTypes.arrayOf(
     PropTypes.shape({
-      poster_path: PropTypes.string.isRequired
+      id: PropTypes.number.isRequired,
+      poster_path: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired
     })
   ).isRequired
 };

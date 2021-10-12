@@ -40,7 +40,6 @@ class ListView extends Component {
                 for (var i = 0; i < popularTVs.length; i++) {
                     popularTVs[i]["rank"] = i;
                 }
-                console.log(popularTVs);
                 this.setState({ popularTVs });
                 this.setState({ filter: popularTVs })
             })
@@ -183,7 +182,7 @@ class ListView extends Component {
                                 <Card>
                                     <CardContent className="card-content">
                                         <div className="card-supp-details">
-                                            <h1> {content.rank+1 + " " + content.name} </h1>
+                                            <h1> {content.rank+1 + " - " + content.name} </h1>
                                             <h3>
                                                 Average Score: {content.vote_average} <FontAwesomeIcon icon={faStar} />
                                             </h3>
