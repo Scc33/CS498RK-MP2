@@ -19,7 +19,6 @@ class App extends Component {
     axios.get('https://api.themoviedb.org/3/tv/popular?api_key=f052c50e624989f8ef4a5acc45dfc7f2&language=en-US&page=1')
       .then(res => {
         const popularTVs = res.data.results;
-        console.log(popularTVs)
         this.setState({ popularTVs });
       })
   }

@@ -17,7 +17,7 @@ class Gallery extends Component {
   }
 
   handleGenreChange = key => (event, value) => {
-    if (key == -1) {
+    if (key === -1) {
       this.setState({ filtered: this.state.shows })
     } else {
       const filtered = this.state.shows.filter(show => (

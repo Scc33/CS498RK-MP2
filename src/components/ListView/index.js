@@ -84,8 +84,6 @@ class ListView extends Component {
         const { value } = event.target;
         this.setState({ sorted: value });
         var filter = this.state.filter.slice();
-        console.log("before", filter);
-
         if (value === "pop") {
             filter.sort(function (a, b) { return b.popularity - a.popularity });
         } else {
@@ -94,7 +92,6 @@ class ListView extends Component {
         if (this.state.order === "descending") {
             filter.reverse();
         }
-        console.log("after", filter);
         this.setState({ filter });
     }
 
