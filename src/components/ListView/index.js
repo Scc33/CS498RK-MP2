@@ -157,7 +157,7 @@ class ListView extends Component {
                 <div className="results">
                     {this.state.filter.map((content) => (
                         <div className="card" key={content.id}>
-                            <a href={"/Content/" + content.id}>
+                            <a href={"/mp2/Content/" + content.id}>
                                 <Card>
                                     <CardContent className="card-content">
                                         <div className="card-supp-details">

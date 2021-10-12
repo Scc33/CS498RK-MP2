@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import 'font-awesome/css/font-awesome.min.css';
 
 ReactDOM.render(
-  <BrowserRouter basename={process.env.PUBLIC_URL}>
+  <BrowserRouter>
     <App />
   </BrowserRouter>,
   document.getElementById('root')

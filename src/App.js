@@ -35,13 +35,13 @@ class App extends Component {
       if (i === this.state.popularTVs.length - 1) {
         n = 0;
       }
-      details.push(<Route path={"/Content/" + this.state.popularTVs[i].id}>
+      details.push(<Route path={"/mp2/Content/" + this.state.popularTVs[i].id}>
         <DetailView
           key={i}
           ranking={i + 1}
           tv={this.state.popularTVs[i]}
-          prev={"/Content/" + this.state.popularTVs[p].id}
-          next={"/Content/" + this.state.popularTVs[n].id}
+          prev={"/mp2/Content/" + this.state.popularTVs[p].id}
+          next={"/mp2/Content/" + this.state.popularTVs[n].id}
         />
       </Route >);
     }
@@ -50,16 +50,16 @@ class App extends Component {
         <div className="menu">
           <h1 className="header">Movies</h1>
           <div className="menu-link">
-            <Button variant="contained" href="/ListView">Search</Button>
+            <Button variant="contained" href="/mp2/ListView">Search</Button>
           </div>
           <div className="menu-link">
-            <Button variant="contained" href="/Gallery">Gallery</Button>
+            <Button variant="contained" href="/mp2/Gallery">Gallery</Button>
           </div>
         </div>
         <div className="item">
-          <Route path="/" exact component={ListView} />
-          <Route path="/ListView" exact component={ListView} />
-          <Route path="/Gallery" exact component={Gallery} />
+          <Route path="/mp2/" exact component={ListView} />
+          <Route path="/mp2/ListView" exact component={ListView} />
+          <Route path="/mp2/Gallery" exact component={Gallery} />
           {details}
         </div>
       </div>

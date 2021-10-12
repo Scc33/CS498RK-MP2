@@ -8,7 +8,7 @@ class Results extends Component {
       <div className="Results">
         {this.props.content.map((show) => (
           <div className="Results-item" key={show.id}>
-            <a href={"/Content/" + show.id}>
+            <a href={"/mp2/Content/" + show.id}>
               <img
                 className="img"
                 src={"https://image.tmdb.org/t/p/w500" + show.poster_path}
